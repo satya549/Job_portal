@@ -15,11 +15,11 @@ const userSchema = new mongoose.Schema({
         required:true
     },
     password:{
-        type:Number,
+        type:String,
         required:true
     },
     role:{
-        type:Number,
+        type:String,
         enum:['student', 'recruiter'],
         required:true
     },

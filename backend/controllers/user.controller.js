@@ -8,7 +8,7 @@ export const register = async (req, res) => {
       throw new Error("Please provide all required field");
     }
     const user = await UserModel.findOne({ email });
-    if (!user) {
+    if (user) {
       throw new Error("User alrready exist");
     }
 
@@ -32,3 +32,18 @@ export const register = async (req, res) => {
     });
   }
 };
+
+export const login =async(req, res) => {
+    try {
+        const {email, password, role} =req.body;
+        if(!email, !password, !role){
+            throw new Error("provide all required field")
+        }
+        const user = await UserModel.findOne({ email });
+        if (!user) {
+            throw new Error("Incorrect Email or password");
+          }
+    } catch (error) {
+        
+    }
+}
