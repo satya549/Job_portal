@@ -107,9 +107,15 @@ export const UpdateProfile = async (req,res) =>{
       skills: skillsArray
     });
     if(!user){
-      throw new Error("Unable to Update the Profile.")
+      throw new Error("User not found.")
     }
+    return res.status(200).json({
+      success:true,
+      message:"Profile updated successfully.",
+      data:user
+    })
   } catch (error) {
+    console.error(error)
    return res.json({
       status_code: 400,
       success: false,
