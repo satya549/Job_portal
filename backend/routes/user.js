@@ -4,9 +4,9 @@ import { tokenValidator } from "../middleware/authentication.js";
 
 const router = express.Router();
 
-router.post("/user", register);
-router.post("/", login);
-router.post("/", logout);
-router.put("/update/:id", UpdateProfile);
+router.post("/register", register);
+router.post("/login", login);
+router.get("/logout", logout);
+router.put("/update/:id",tokenValidator, UpdateProfile);
 
 export default router;
