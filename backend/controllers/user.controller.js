@@ -101,14 +101,14 @@ export const logout = async (req, res) => {
 export const UpdateProfile = async (req, res) => {
   try {
     const { fullname, email, phoneNumber, bio, skills } = req.body;
-    const profileId = req.params.id;
+    // const profileId = req.params.id;
     const file = req.file;
     let skillsArray;
     if (skills) {
       skillsArray = skills.split(",");
     }
-    
-    let user = await UserModel.findByIdAndUpdate(profileId, {
+      const usrid = req.id;
+    let user = await UserModel.findByIdAndUpdate(usrid, {
       fullname,
       email,
       phoneNumber,

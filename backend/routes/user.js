@@ -7,6 +7,6 @@ const router = express.Router();
 router.post("/register", register);
 router.post("/login", login);
 router.get("/logout", logout);
-router.put("/update/:id",tokenValidator, UpdateProfile);
+router.put("/update/",tokenValidator, UpdateProfile);
 
 export default router;

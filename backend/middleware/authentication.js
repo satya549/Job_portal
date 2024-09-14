@@ -3,14 +3,16 @@ import jwt from "jsonwebtoken";
 const secretKey = "secretkey";
 
 export const tokenValidator = (req, res, next) => {
-  const token = req.headers['authorization'];
-  
   try {
-      if (!token) throw new Error("Token is required in header");
-      const authToken = token.split(" ")
+    const token =  req.cookies.token;           //req.headers['authorization'];
+      if (!token) throw new Error("User not authenticated");
+     // const authToken = token.split(" ")
        
-    const decoded = jwt.verify(authToken[1], secretKey); 
-   
+    const decoded = jwt.verify(token, secretKey); 
+    if(!decoded){
+      throw new Error("Invalid Token")
+    }
+    req.id = decoded.userId;
     next();
   } catch (error) {
     return res.json({
