@@ -1,15 +1,16 @@
-import CompanyModel from "../models/company.model";
+import CompanyModel from "../models/company.model.js";
 
 export const registerCompany = async (req, res) => {
   try {
-    const { companyName } = req.body;
-     if(!companyName){
-        throw new Error("Company name is required")
-     }
+    const { companyName,location } = req.body;
+    if (!companyName || !location) {
+      throw new Error("CompanyName and location are required.");
+    }
     let company = await CompanyModel.findOne({ name: companyName });
 
     company = await CompanyModel.create({
       name: companyName,
+      location,
       userId: req.id,
     });
     return res.status(200).json({
@@ -33,6 +34,10 @@ export const getCompanies = async (req, res) => {
     if (!companies) {
       throw new error("Companies not found.");
     }
+    return res.status(200).json({
+      companies,
+      success:true
+    })
   } catch (error) {
     console.error(error);
     res.json({
@@ -49,6 +54,10 @@ export const getCompany = async (req, res) => {
     if (!company) {
       throw new Error("Company not fonud.");
     }
+    return res.status(200).json({
+      company,
+      success:true
+    })
   } catch (error) {
     console.error(error);
     res.json({
@@ -73,6 +82,11 @@ export const updateCompany = async (req, res) => {
       },
       { new: true }
     );
+    return res.status(200).json({
+      company,
+      message:"Updated seccessfully",
+      success:true
+    })
   } catch (error) {
     console.error(error);
     res.json({

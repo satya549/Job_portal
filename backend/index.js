@@ -2,7 +2,8 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import cors from "cors";
 import db from "./db/connection.js";
-import router from "./routes/user.js";
+import userRoute from "./routes/user.js";
+import companyRoute from "./routes/company.js"
 
 const app = express();
 const PORT = 4600;
@@ -18,7 +19,8 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/user", router);
+app.use("/user", userRoute);
+app.use("/company",companyRoute);
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
