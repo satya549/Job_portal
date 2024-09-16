@@ -1,4 +1,4 @@
-import jobModel from "../models/job.model";
+import jobModel from "../models/job.model.js";
 
 export const CreateJob = async (req,res) =>{
     try {
@@ -16,7 +16,7 @@ export const CreateJob = async (req,res) =>{
             jobType,
             experience:experience,
             position,
-            companyId:companyId,
+            company:companyId,
             created_by:userId
           });
       
@@ -44,7 +44,9 @@ export const getAllJobs = async (req, res) => {
         { description: { $regex: job, $options: "i" } },
       ],
     };
-    const jobs = await jobModel.find(query);
+    const jobs = await jobModel.find(query).populate({
+        path: "company",
+      }).sort({ createdAt: -1 });
     if (!jobs) {
       throw new Error("Jobs not found.");
     }
@@ -75,5 +77,26 @@ export const getJobById = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const getAdminJobs = async (req, res) => {
+  try {
+    const adminId = req.id;
+   
+    const jobs = await jobModel.find({ created_by:adminId });
+    if (!jobs) {
+      throw new Error("Jobs not found.");
+    }
+    return res.status(200).json({
+      success: true,
+      jobs,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      status_code: 400,
+      success: false,
+      message: error.message,
+    });
   }
 };
