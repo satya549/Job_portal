@@ -6,15 +6,16 @@ const applicationSchema = new mongoose.Schema({
       ref: "Job",
       required: true,
     },
-    application: {
+    applicant: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Application",
+      ref: "User",
+      required:true
     },
     status: {
       type: String,
       enum: ["pending", "accepted", "rejected"],
       default: "pending",
-    },
+    }
   },
   { timestamps: true }
 );
