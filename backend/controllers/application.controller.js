@@ -64,18 +64,18 @@ export const getAppliedJobs = async (req, res) => {
 export const getAplicants = async (req, res) => {
   try {
     const jobId = req.params.id;
-    const jobApplicaton = await jobModel.findById(jobId).populate({
+    const jobApplicants = await jobModel.findById(jobId).populate({
       path: "applications",
       options: { sort: { createdAt: -1 } },
       populate: {
         path: "applicant",
       },
     });
-    if (!job) {
+    if (!jobApplicants) {
       throw new Error("No Applicatin");
     }
     return res.status(200).json({
-      job,
+      jobApplicants,
       success: true,
     });
   } catch (error) {
@@ -85,8 +85,8 @@ export const getAplicants = async (req, res) => {
 
 export const updateStatus = async (req, res) => {
   try {
-    const { status } = req.body;
     const applicationId = req.params.id;
+    const { status } = req.body;
     if (!status) {
       throw new Error("status is required");
     }

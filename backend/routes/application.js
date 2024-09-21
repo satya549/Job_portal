@@ -5,7 +5,7 @@ import { applyJob, getAplicants, getAppliedJobs, updateStatus } from "../control
 const router = express.Router();
 
 router.get("/apply/:id",tokenValidator, applyJob);
-router.get("/",tokenValidator, getAppliedJobs);
+router.get("/appliedjobs",tokenValidator, getAppliedJobs);
 router.get("/applicants/:id",tokenValidator, getAplicants);
 router.post("/:id",tokenValidator, updateStatus);
 
