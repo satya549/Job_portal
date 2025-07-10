@@ -1,3 +1,6 @@
+import { Search } from "lucide-react";
+import { Button } from "./ui/button";
+
 const HeroSection = () => {
   return (
     <div className="text-center">
@@ -9,7 +12,17 @@ const HeroSection = () => {
           Search, Apply & <br /> Get Your{" "}
           <span className="text-[#6A38C2]">Dream Jobs</span>
         </h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi unde non nostrum est dicta.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodiundenon nostrum est dicta.</p>
+        <div className="flex w-[40%] shadow-lg border border-gray-200 pl-3 rounded-full items-center gap-4 mx-auto">
+          <input
+            type="text"
+            placeholder="Find your dream jobs"
+            className="cutline-none border-none w-full"
+          />
+          <Button className="rounded-r-full bg-[#6A38C2]">
+            <Search className="h-5 w-5"/>
+          </Button>
+        </div>
       </div>
     </div>
   );
